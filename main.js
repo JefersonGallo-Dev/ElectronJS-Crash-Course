@@ -29,7 +29,7 @@ const menuItems = [
           
           ipcMain.on('close_camerawin', (event, data) => win3.close());
 
-          win3.webContents.openDevTools();
+          // win3.webContents.openDevTools();
           win3.loadFile("camera.html")
           // win2.loadURL("https://www.electronjs.org/docs/latest/");
           win3.once("ready-to-show", () => win3.show());
@@ -106,7 +106,7 @@ const createWindow = () => {
     });
     
     
-    win.webContents.openDevTools();
+    // win.webContents.openDevTools();
     win.loadFile('index.html');
   };
 

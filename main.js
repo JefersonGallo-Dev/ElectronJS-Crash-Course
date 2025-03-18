@@ -2,6 +2,7 @@ const { app, BrowserWindow, Menu, shell, ipcMain  } = require('electron');
 // include the Node.js 'path' module at the top of your file
 const path = require('node:path')
 
+// Define the menu items and the submenu //
 const menuItems = [
   {
     label: "Menu",
@@ -39,6 +40,7 @@ const menuItems = [
       {
         label: "Learn More",
         click: async () => {
+          // ?? What is shell
           await shell.openExternal('https://www.electronjs.org/docs/latest/')
         },
       },
@@ -84,8 +86,9 @@ const menuItems = [
   },
 ];
 
+// Build the menu from template //
 const menu = Menu.buildFromTemplate(menuItems);
-
+// Set the menu in the browser window //
 Menu.setApplicationMenu(menu);
 
 // Funciton to create the main window //
@@ -111,21 +114,24 @@ const createWindow = () => {
     win.loadFile('index.html');
   };
 
-
 // Create the window when the app is ready //
 app.whenReady().then(() => {
     // Create the main vindow //
     createWindow();
     app.on('activate', () => {
       // Create a new window if there is no windows opened //
-      if (BrowserWindow.getAllWindows().length === 0) createWindow()
+      if (BrowserWindow.getAllWindows().length === 0){
+        createWindow();
+      } 
     })
 });
 
 
 app.on('window-all-closed', () => {
   // Implementatio for MacOS //
-  if (process.platform !== 'darwin') app.quit()
+  if (process.platform !== 'darwin'){
+    app.quit();
+  } 
 });
 
 

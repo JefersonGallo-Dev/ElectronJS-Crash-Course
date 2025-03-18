@@ -1,3 +1,5 @@
+
+
 window.addEventListener('DOMContentLoaded', () => {
     const replaceText = (selector, text) => {
       const element = document.getElementById(selector)
@@ -14,3 +16,4 @@ contextBridge.exposeInMainWorld('electronAPI', {
   getImage: (callback) => ipcRenderer.on('get-image', callback),
   closeCameraWin: () => ipcRenderer.send("close_camerawin"),
 })
+

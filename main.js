@@ -88,6 +88,7 @@ const menu = Menu.buildFromTemplate(menuItems);
 
 Menu.setApplicationMenu(menu);
 
+// Funciton to create the main window //
 const createWindow = () => {
     const win = new BrowserWindow({
       width: 800,
@@ -110,17 +111,23 @@ const createWindow = () => {
     win.loadFile('index.html');
   };
 
-  app.whenReady().then(() => {
-    createWindow()
-  
+
+// Create the window when the app is ready //
+app.whenReady().then(() => {
+    // Create the main vindow //
+    createWindow();
     app.on('activate', () => {
+      // Create a new window if there is no windows opened //
       if (BrowserWindow.getAllWindows().length === 0) createWindow()
     })
-  });
+});
+
 
 app.on('window-all-closed', () => {
+  // Implementatio for MacOS //
   if (process.platform !== 'darwin') app.quit()
 });
+
 
 
 

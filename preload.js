@@ -13,6 +13,7 @@ window.addEventListener('DOMContentLoaded', () => {
 
 const { contextBridge, ipcRenderer } = require('electron/renderer')
 contextBridge.exposeInMainWorld('electronAPI', {
+  sendImage: (data) => ipcRenderer.send('set-image', data),
   getImage: (callback) => ipcRenderer.on('get-image', callback),
   closeCameraWin: () => ipcRenderer.send("close_camerawin"),
 })

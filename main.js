@@ -3,12 +3,35 @@ const { app, BrowserWindow, Menu, shell, ipcMain  } = require('electron');
 const path = require('node:path')
 
 // Define the menu items and the submenu //
+// We can create items with different roles // 
 const menuItems = [
   {
     label: "Menu",
     submenu: [
       {
         label: "About",
+        click: async () => {
+          const winAbout = new BrowserWindow({
+            height: 500,
+            width: 800,
+            show: false,
+            minimizable:false,
+            movable:false,
+            // frame: false,
+            
+            // webPreferences: {
+            //   preload: path.join(__dirname, 'preload.js')
+            // }
+          });
+          
+          
+
+          // win3.webContents.openDevTools();
+          winAbout.loadURL("https://www.electronjs.org/docs/latest/")
+          // win2.loadURL("https://www.electronjs.org/docs/latest/");
+          winAbout.once("ready-to-show", () => winAbout.show());
+          
+        },
       },
 
     ]
@@ -24,7 +47,7 @@ const menuItems = [
             width: 800,
             show: false,
             webPreferences: {
-              preload: path.join(__dirname, 'cameraPreload.js')
+              preload: path.join(__dirname, 'preload.js')
             }
           });
           
@@ -56,7 +79,7 @@ const menuItems = [
             movable: false,
           });
 
-          win2.loadFile("index.html")
+          win2.loadFile("index2.html")
           // win2.loadURL("https://www.electronjs.org/docs/latest/");
           win2.once("ready-to-show", () => win2.show());
         },
@@ -96,6 +119,7 @@ const createWindow = () => {
     const win = new BrowserWindow({
       width: 800,
       height: 600,
+      show:false,
       webPreferences: {
         preload: path.join(__dirname, 'preload.js')
       }
@@ -105,13 +129,14 @@ const createWindow = () => {
       // const webContents = event.sender
       // const win = BrowserWindow.fromWebContents(webContents)
       // win.setTitle(title)
-      console.log(data)
+      // console.log(data)
       win.webContents.send("get-image", data);
     });
     
     
     // win.webContents.openDevTools();
     win.loadFile('index.html');
+    win.once("ready-to-show", () => win.show())
   };
 
 // Create the window when the app is ready //

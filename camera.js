@@ -42,7 +42,7 @@ function captureImage() {
   
 };
 
-console.log(window.electronAPI);
+// console.log(window.electronAPI);
 
 window.addEventListener('load', startCamera);
 document.getElementById('captureButton').addEventListener('click', captureImage);

@@ -6,3 +6,4 @@ window.electronAPI.getImage((event, data) => {
     imageTag.src = data;
     // window.electronAPI.closeCameraWin();
 });
+
